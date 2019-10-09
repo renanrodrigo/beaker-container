@@ -37,6 +37,8 @@ ADD ansible/ /home/dev/ansible/
 RUN cd /home/dev/ansible &&\
     PYTHONUNBUFFERED=1 ansible-playbook -c local dev-env.yml -vvv
 
+ADD runwithlocaluser.sh /opt/entrypoints/runwithlocaluser.sh
+
 WORKDIR /home/dev
 
-CMD bash
+CMD ["/opt/entrypoints/runwithlocaluser.sh"]

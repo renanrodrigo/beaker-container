@@ -4,24 +4,17 @@ volumes:
   beaker-db-data:
 
 services:
-  devbase:
-    build: base/CentOS7
-
-  dev:
-    build: dev
-
   sandbox:
-    image: beaker_dev
+    image: beaker-dev
+    environment:
+      - LOCAL_USER_ID=${BEAKER_LOCAL_USER_ID}
+      - LOCAL_GROUP_ID=${BEAKER_LOCAL_GROUP_ID}
     working_dir: /home/dev
     privileged: true
     volumes:
-      - ../../beaker:/home/dev/beaker
-      - /tmp/beaker_mysql:/var/lib/mysql/
-      - ./:/opt/entrypoints
+      - ../beaker:/home/dev/beaker
     ports:
       - "8080:8080"
-    entrypoint:
-      - /opt/entrypoints/runwithlocaluser.sh
 
   beaker-database:
     image: beaker-db

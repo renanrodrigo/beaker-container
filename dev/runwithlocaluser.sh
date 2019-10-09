@@ -12,4 +12,4 @@ sudo usermod -aG wheel dev
 sudo chown dev:dev /home/dev
 sudo bash -c "echo 'dev ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 sudo bash -c "echo 'Defaults:dev !requiretty' >> /etc/sudoers"
-exec /usr/bin/sudo su - dev
+tail -f /dev/null
