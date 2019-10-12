@@ -32,13 +32,11 @@ RUN mkdir /etc/ansible/ && \
 
 USER ansibledev
 
-ADD ansible/ /home/dev/ansible/
+ADD ansible/ /home/ansibledev/ansible/
 
-RUN cd /home/dev/ansible &&\
+RUN cd /home/ansibledev/ansible &&\
     PYTHONUNBUFFERED=1 ansible-playbook -c local dev-env.yml -vvv
 
-ADD runwithlocaluser.sh /opt/entrypoints/runwithlocaluser.sh
+WORKDIR /home/ansibledev
 
-WORKDIR /home/dev
-
-CMD ["/opt/entrypoints/runwithlocaluser.sh"]
+CMD tail -f /dev/null
